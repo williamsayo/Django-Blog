@@ -1,0 +1,51 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'posts/post_view.css' %}">
+{% endblock css %}
+
+{% block content %}
+  <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8 blog-main">
+          <div class="blog-post">
+              <img src="{{ post.post_image.url}}" alt="pic">
+              <h2 class="blog-post-title">{{ post.title}}</h2>
+              <p class="blog-post-meta">{{post.date_posted|date:'F d, Y'}} by <a href="{% url 'view-author-post' post.author.username %}">{{ post.author}}</a></p>
+              <p><div class="content">{{ post.content}}</p></div>
+              <p class="blog-post-meta">Category:<a href="{% url 'category-post' post.category %}">{{ post.category}}</a></p>
+      
+              <div class="edit-post">
+                <a href="{% url 'update-post' post.id %}"><button id="update-btn" class="btn btn-outline-secondary"> Update</button></a>
+                <a href="{% url 'delete' post.id %}"><button id="delete-btn" class="btn btn-outline-danger"> Delete</button></a>
+              </div>
+
+              <div class="comment-wrapper">
+                {% for comments in comment %}
+
+                  <div class="comment"><strong>Comment:</strong> {{ comments.comment}} -- <img src="{{comments.comment_author.profile.image.url}}" alt="img"> <a href="#">{{ comments.comment_author}}</a> <span>{{comments.date_posted|date:'F d, y '}}</span></div>
+                
+                {% endfor %}
+              </div>
+
+              {% if user.is_authenticated %}
+                <div class="comments">
+                  <form method="POST">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                      <button id="update-btn" class="btn btn-outline-secondary" type="submit">Add Comment</button>
+                  </form>
+                </div>
+              {% endif %}
+
+          </div>
+        </div>
+      </div>
+  </main>
+
+
+
+{% endblock content %}
+<!-- <a href="{% url 'comment' post.id %}"><button class="btn btn-outline-secondary"> comment</button></a> -->

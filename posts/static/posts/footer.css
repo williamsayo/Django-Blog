@@ -1,0 +1,149 @@
+/* footer */
+
+.footer-container{
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    margin-top: 80px;
+}
+
+ .bottom-footer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    color: #DFDFDF;
+    background: #262626;
+    padding: 0px 10px 25px 10px;
+}
+
+.contact-us{
+    width: 40%;
+}
+
+.subscribe{
+    width: 35%;
+}
+
+.footer-link{
+    width: 25%;
+}
+
+.footer-heading{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 1000;
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.bottom-footer ul li{
+    display: block;
+    text-transform: capitalize;
+    margin: 0px 20px;
+    padding: 20px 15px;
+    list-style: none;
+    text-decoration: none;
+    border-bottom: rgba(255,255,255,.1) solid 1px;
+}
+
+.bottom-footer ul li:first-child{
+    border-bottom: 0px;
+}
+
+.bottom-footer ul li:last-child{
+    border-bottom: 0px;
+}
+
+.subscribe ul li:first-child{
+    margin: 0px;
+    padding: 20px 0px;
+}
+
+.subscribe ul li:last-child{
+    margin: 0;
+    padding: 20px 0 0 0;
+}
+
+.subscribe-header,.subscribe form{
+    width: 60%;
+    margin: auto;
+}
+
+.subscribe form input{
+    width: 100%;
+    margin: 6px 0px;
+    padding: 5px 5px;
+    color: black
+}
+
+.subscribe form button{
+    display: block;
+    text-transform: uppercase;
+    color: white;
+    background: #F7A804;
+    padding: 8px 18px 10px;
+    text-transform: uppercase;
+    border: 1px solid;
+    transition: 300ms ease-in-out;
+    width: 8em;
+    margin: 10px 0px;
+}
+
+.subscribe form button:hover{
+    border: black 1px solid;
+    color: black;
+    background: white;
+}
+
+.bottom-footer .footer-link{
+    text-transform: uppercase;
+}
+
+.bottom-footer .footer-link a{
+    color: white;
+}
+
+.bottom-footer .copyright{
+    text-transform: capitalize;
+    padding-left: 28px;
+}
+
+
+.copyright {
+    background: black;
+    width: 100%;
+    padding: 25px;
+}
+
+
+@media(max-width:800px){
+    .left-side{display:none}
+    .nav-container{
+        justify-content: flex-end;
+        text-transform: capitalize;
+    }
+
+    .bottom-footer{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-us,.subscribe,.footer-link{
+        width: 100%;
+    }
+
+    .subscribe{
+        padding: 10px 35px;
+    }
+
+    .subscribe ul li:last-child{
+        padding-top: 10px;
+    }
+
+    .footer-link a{
+        width: 93%;
+    }
+
+    .subscribe-header,.subscribe form{
+        margin: 0px;
+    }
+}

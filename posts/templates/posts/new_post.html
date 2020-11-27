@@ -1,0 +1,21 @@
+{% extends 'posts/navbar.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block nav_css %}
+    <link rel="stylesheet" href="{% static 'posts/new_post.css'%}">
+{% endblock nav_css %}
+
+{% block content %}
+
+    <div class="post-form-container">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form|crispy}}
+
+            <div class="create-btn">
+                <button type="submit"> {{status}} Post</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,7 @@
+.nav-container > .right-side > .nav-link-container .active{
+    color: red;
+}
+
+.about-page{
+    min-height: 100vh;
+}

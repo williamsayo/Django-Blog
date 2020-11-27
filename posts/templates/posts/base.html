@@ -1,0 +1,142 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>    
+    <link rel="stylesheet" href="{% static 'posts/base.css' %}">
+    <script src="{% static 'posts/base.js' %}"></script>
+
+    {% block css %}{% endblock css %}
+    <title>Blog</title>
+    
+</head>
+<body>
+
+    <div id="navbar-id" class="nav-container">
+        <div class="left-side">
+            <div class="brand">
+                Williams
+            </div>
+        </div>
+
+        <div class="right-side">
+            {% if user.is_authenticated %}
+                <div class="nav-link-container profile">
+                    <a  href="{% url 'profile-detail' user.username %}"> <i class="glyphicon glyphicon-user"></i> Profile</a>
+                </div>
+
+                <div class="nav-link-container new-post">
+                    <a href="{% url 'newpost' %}"><i class="glyphicon glyphicon-plus"></i> New post</a>
+                </div>
+            {% endif %}
+
+            <div class="nav-link-container category-container">
+                <div class="subnav">
+                    <a class="subnav-btn"><i class="glyphicon glyphicon-menu-down"></i> Category</a>
+                    <div class="subnav-content">
+                        <a href="{% url 'category-post' 'WORLD' %}">World</a>
+                        <a href="{% url 'category-post' 'TECHNOLOGY' %}">technolgy</a>
+                        <a href="{% url 'category-post' 'DESIGN' %}">design</a>
+                        <a href="{% url 'category-post' 'BUSSINESS' %}">business</a>
+                        <a href="{% url 'category-post' 'POLITICS' %}">politics</a>
+                        <a href="{% url 'category-post' 'HEALTH' %}">health</a>
+                        <a href="{% url 'category-post' 'TRAVEL' %}">travel</a>                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-link-container search-container">
+                <div class="search">
+                    <div id="search-menu" class="search-content">
+                        <form action="{% url 'search' %}" method="GET">
+                            <input type="search" name="q" placeholder="Search...">
+
+                        </form>
+                    </div>
+
+                    <a onclick="SearchDisplay()"><i class="glyphicon glyphicon-search"></i></a>
+                </div>
+
+            </div>
+
+            <div class="nav-link-container" style="border-bottom: 0px transparent;">
+                <div id="sidebar">
+                        
+                    <span class="slide">
+                        <a onclick="OpenSlideMenu()"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
+                    </span>
+
+                    <div id="menu" class="sidebar-content">
+                        <a class="close" onclick="CloseSlideMenu()"> 
+                            <i class="glyphicon glyphicon-remove-sign"></i>
+                        </a>
+                        {% if user.is_authenticated %}
+                            <ul>   
+                                <li><img src="{{user.profile.image.url}}" alt="profile"></li>
+                                <li><a class="active" href="{% url 'home' %}"> <i class="glyphicon glyphicon-home"></i> home </a></li>
+                                <li><a href="{% url 'about' %}"> <i class="glyphicon glyphicon-question-sign"></i> about </a></li>
+
+                                <li class="profile"><a href="{% url 'profile-detail' user.username %}"> <i class="glyphicon glyphicon-user"></i> Profile</a></li>                
+                                <li class="new-post"><a href="{% url 'newpost' %}"><i class="glyphicon glyphicon-plus"></i> New post</a></li>
+
+                                <li><a href="{% url 'logout' %}"> <i class="glyphicon glyphicon-log-out"></i> logout </a></li>
+
+                                <div class="social-media">
+                                    <a href="https://www.instagram.com/williamsayo44/"><li> <i class="fa fa-instagram"> </i> </li> </a>
+                                    <a href="https://www.facebook.com"><li><i class="fa fa-facebook"></i> </li> </a>
+                                    <a href="https://www.twitter.com"><li> <i class="fa fa-twitter"></i> </li> </a>
+                                    <a href="https://www.google.com"><li> <i class="fa fa-google"></i> </li> </a>
+                                    <a href="https://www.linkedin.com"><li> <i class="fa fa-linkedin"></i> </li> </a>
+                                </div>
+                                <div class="sidebar-footer">
+                                    &copy; 2019-2020 Williams <br>
+                                    All rights reserved
+                                </div>
+                            </ul>
+                            
+                        {% else %}
+                            <ul>   
+                                <li><a class="active" href="{% url 'home' %}"> <i class="glyphicon glyphicon-home"></i> home </a></li>
+                                <li><a href="{% url 'about' %}"> <i class="glyphicon glyphicon-question-sign"></i> about </a></li>
+                                <li><a href="{% url 'login' %}"> <i class="glyphicon glyphicon-log-in"></i> login </a></li>
+                                <li><a href="{% url 'create-user' %}"> <i class="glyphicon glyphicon-circle-arrow-up"></i> signup </a></li>
+
+                                <div class="social-media">
+                                    <a href="https://www.instagram.com/williamsayo44/"><li> <i class="fa fa-instagram"> </i> </li> </a>
+                                    <a href="https://www.facebook.com"><li><i class="fa fa-facebook"></i> </li> </a>
+                                    <a href="https://www.twitter.com"><li> <i class="fa fa-twitter"></i> </li> </a>
+                                    <a href="https://www.google.com"><li> <i class="fa fa-google"></i> </li> </a>
+                                    <a href="https://www.linkedin.com"><li> <i class="fa fa-linkedin"></i> </li> </a>
+                                </div>
+                                <div class="sidebar-footer">
+                                    &copy; 2019-2020 Williams <br>
+                                    All rights reserved
+                                </div>
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>  
+            </div>
+
+        </div>
+    </div>
+    <div class="body-container">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">{{message}}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock content %}
+
+        {% block footer %}{% endblock footer %}
+
+    </div>
+
+</body>
+
+</html>

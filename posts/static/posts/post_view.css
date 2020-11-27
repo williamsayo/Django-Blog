@@ -1,0 +1,86 @@
+main{
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+img{
+    width: 600px;
+    height: 300px;
+}
+
+h2{
+    font-weight: bolder;
+}
+
+.content{
+    font-weight: 500;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
+}
+
+.edit-post{
+    margin: 20px 0px;
+}
+
+#update-btn{
+    transition: 300ms ease-out;
+    border: 1.2px solid rgba(0, 400, 0, .6);
+}
+
+#update-btn:hover{
+    background: rgba(0, 400, 0, .6);
+}
+
+#delete-btn{
+    transition: 300ms ease-out;
+    border: 1.2px solid rgba(400, 0, 0, .6);
+}
+
+#delete-btn:hover{
+    background: rgba(400, 0, 0, .6);
+}
+
+.comment-wrapper{
+    background-color: burlywood;
+    border-top:1px solid grey ;
+    margin: 20px 0px;
+}
+
+.comment img{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.comment a{
+    text-transform: capitalize;
+}
+
+.comment span{
+    color: gray;
+    font-weight: lighter;
+}
+
+.comment{
+    padding: 10px 0px;
+    display: inline-block;
+    border-bottom:1px solid grey ;
+    font-weight: 600;
+    width: 100%;
+}
+
+.comment strong{
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.comments{
+    position: relative;
+    top:100px ;
+    border-bottom:1px solid grey ;
+    /* margin-top: 100px; */
+}
+
+.comments button{
+    margin: 10px 0px;
+}

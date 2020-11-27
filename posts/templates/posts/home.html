@@ -1,0 +1,193 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+{% load search %}
+
+{% block css %}
+
+<style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+    <link rel="stylesheet" href="{% static 'posts/home.css'%}">
+    <link rel="stylesheet" href="{% static 'posts/footer.css' %}">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/blog/">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+{% endblock css %}
+
+{% block content %}
+
+    {% if search_var %}
+
+        <div class="search-found">
+            {{search_count}} search results for " {{search_var}} " found
+        </div>
+
+    {% endif %}
+
+    {% if post %}
+        <div class="main-content">
+            <div class="blog-post">
+                {% for posts in post %}
+                    <div class="post">
+                        <div class="post-image">
+                            <img src="{{ posts.post_image.url}}" alt="pic">
+                        </div>
+                        <div class="post-content">
+                            <div class="post-info">
+                                <i class="glyphicon glyphicon-user"></i> <a href="{% url 'view-author-post' posts.author.username %}"> {{ posts.author}} </a>
+                                <i class="glyphicon glyphicon-calendar"></i> {{posts.date_posted|date:'F d Y'}}
+                                <i class="glyphicon glyphicon-thumbs-up"></i> {{ posts.comments_quantity|length }}
+                            </div>
+                            <div class="post-title">
+                                <h3 class="blog-post-title">{{ posts.title}} </h3>
+                            </div>
+                            <div class="post-body">
+                                {{ posts.post_summary}}
+                            </div>
+                            <a href="{% url 'view-post' posts.id %}" class="stretched-link"> <button>Read More </button></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="sidebar">
+                <div class="Category">
+                    <h3>Category</h3>
+                    <a href="{% url 'category-post' 'WORLD' %}"> <div class="category-pill"> world <span> ({{world|length}}) </span> </div> </a>
+                    <a href="{% url 'category-post' 'TECHNOLOGY' %}"> <div class="category-pill"> technology <span> ({{tech|length}}) </span> </div> </a>
+                    <a href="{% url 'category-post' 'DESIGN' %}"><div class="category-pill"> design <span> ({{design|length}}) </span> </div> </a>
+                    <a href="{% url 'category-post' 'BUSINESS' %}"><div class="category-pill"> business <span> ({{business|length}}) </span> </div> </a>
+                    <a href="{% url 'category-post' 'POLITICS' %}"><div class="category-pill"> politics <span> ({{politics|length}}) </span> </div> </a>
+                    <a href="{% url 'category-post' 'HEALTH' %}"><div class="category-pill"> health <span> ({{health|length}}) </span> </div> </a>
+                    <a href="{% url 'category-post' 'TRAVEL' %}"><div class="category-pill"> travel <span> ({{travel|length}}) </span> </div> </a>
+                </div>
+
+                <div class="featured-post">
+                        <h3>Featured Posts</h3>
+                    {% for posts in featured %}
+
+                        <div class="featured-post-card">
+                            <div class="featured-image">
+                                <img src="{{ posts.featured.post_image.url}}" alt="pic">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-info featured-info">
+                                    <i class="glyphicon glyphicon-calendar"></i> {{posts.featured.date_posted|date:'F d Y'}}
+                                    <i class="glyphicon glyphicon-thumbs-up"></i> {{ posts.featured.comments_quantity|length }}
+                                </div>
+                                <div class="post-title featured-title">
+                                    <a href="{% url 'view-post' posts.featured.id %}"><h3 class="blog-post-title">{{ posts.featured.title}} </h3></a>
+                                </div>
+                            </div>
+                        </div>
+             
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+
+    {% endif%}
+
+    {% if latest %}
+        <div class="latest-container">
+            <div class="latest-header">
+                <h2>Latest Releases</h2>
+            </div>
+            <div class="latest-body">
+                {% for latestpost in latest %}
+                    <div class="card">
+                        <img src="{{ latestpost.post_image.url}}" alt="pic">
+                        <div class="latest-text">
+                            <div class="latest-title-container">
+                                {% if latestpost.title|length < 40 %}
+                                    <h3 class="latest-title-sm"> {{ latestpost.title}}</h3>
+                                {% else %}
+                                    <h3 class="latest-title"> {{ latestpost.title}}</h3>
+                                {% endif %}
+                            </div>
+
+                            <div class="latest-author">
+                                <i class="glyphicon glyphicon-user"></i> <a href="{% url 'view-author-post' latestpost.author.username %}"> {{ latestpost.author}} </a> |
+                                <i class="glyphicon glyphicon-time"></i> {{ latestpost.month_ago}} |
+                                <i class="glyphicon glyphicon-thumbs-up"></i> {{ latestpost.comments_quantity|length }}
+                            </div>
+
+                            <div class="latest-summary-container">
+                                <p> {{ latestpost.post_summary}} [...] </p>
+                            </div>
+
+                            <a href="{% url 'view-post' latestpost.id %}" class="stretched-link"> <button>Read More </button></a>
+
+                        </div>
+                        
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    {%  endif %}
+
+    <div id="paginator">
+        {% if is_paginated %}
+            {% if page_obj.has_previous %}
+                <a href="?{% search_parameter page=1 %}"><button> <i class="glyphicon glyphicon-step-backward"></i> </button></a>
+                <a href="?{% search_parameter page=page_obj.previous_page_number %}"><button> <i class="glyphicon glyphicon-menu-left"></i> </button></a>
+                
+                {% if page_obj.number|add:'-3' >= 1 %}
+                    <button >...</button>
+                {% endif %}
+
+            {% else %}
+                <a disabled><button class="disabled" disabled> <div class="text"><i class="glyphicon glyphicon-step-backward"></i> </div> </button></a>
+                <a disabled><button class="disabled" disabled> <div class="text"><i class="glyphicon glyphicon-menu-left"></i></div> </button></a>
+
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+
+                {% if page_obj.number == num %}
+                    <a class="current-page" href="?{% search_parameter page=num %}"> <button>{{num}} </button></a>
+                
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?{% search_parameter page=num %}"> <button class="page-num"> {{num}} </button></a>
+                
+                {% endif %}       
+                
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                {% if page_obj.number|add:'3' <= page_obj.paginator.num_pages %}
+                    <button>...</button>
+                {% endif %}  
+
+                <a href="?{% search_parameter page=page_obj.next_page_number %}"><button> <i class="glyphicon glyphicon-menu-right"></i> </button></a>
+                <a href="?{% search_parameter page=page_obj.paginator.num_pages %}"><button> <i class="glyphicon glyphicon-step-forward"></i> </button></a>
+
+                {% else %}
+                    <a disabled><button class="disabled" disabled> <div class="text"><i class="glyphicon glyphicon-step-forward"></i> </div> </button></a>
+                    <a disabled><button class="disabled" disabled> <div class="text"><i class="glyphicon glyphicon-menu-right"></i></div> </button></a>
+  
+            {% endif %}
+
+        {% endif %}
+    </div>
+
+{% endblock content %}
+
+{% block footer %}
+    {% include "posts/footer.html" %}
+{% endblock footer %}

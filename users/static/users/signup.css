@@ -1,0 +1,122 @@
+body{
+    background-color: #eff0f1;
+    color: black;
+}
+
+.signup-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px
+    
+}
+
+#create-user{
+    border: 1px ridge #ffffff;
+    border-radius: 15px;
+    background:#ffffff;
+    opacity: 1;
+    padding: 0px 40px;
+    padding-bottom: 40px;
+    box-shadow: 1px 1px 1px 1px gray;
+}
+
+.signup-info{
+    margin-top: 200px;
+    margin-right: 100px;
+    word-wrap: normal;
+}
+
+.signup-info h2{
+    display: block;
+    padding-bottom: 25px;
+}
+
+.signup-info h4{
+    display: block;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2em;
+}
+
+.legend{
+    word-wrap: none;
+    font-family:'Times New Roman', Times, serif ;
+    font-weight: bold;
+    font-size: 28px;
+    padding: 10px 0px;
+}
+
+form label{
+    font-weight: bold;
+}
+
+#error_1_id_firstname{
+    color: red;
+}
+
+#error_1_id_lastname{
+    color: red;
+}
+
+#error_1_id_email{
+    color: red;
+}
+
+#error_1_id_username{
+    color: red;
+}
+
+#error_1_id_password2{
+    color: red;
+}
+
+#div_id_username{
+    padding: 5px 0px;
+}
+
+#div_id_email{
+    padding: 5px 0px;
+}
+
+#div_id_password1{
+    padding: 5px 0px;
+}
+
+#div_id_password2{
+    padding: 5px 0px;
+}
+
+#create-user form input{
+    width: 70%;
+    height:30px;
+}
+
+.signup-btn{
+    color: white;
+    width: 50%;
+    font-weight: bold;
+    padding: 5px 0px;
+    border-radius: 10px;
+    background-color: #0095ff;
+    /* #0095ff */
+    margin-bottom: 25px;
+}
+
+.controls ul{
+    margin-left:15px;
+    font-size: 0.9em;
+    color: rgb(128, 128, 128);
+}
+
+@media(max-width:800px){
+    .signup-info{
+        display: none;
+    }
+    #create-user{
+        float: none;
+    }
+}
+
+.account-status a{
+    font-weight: bold;
+    font-size: 15px;
+}

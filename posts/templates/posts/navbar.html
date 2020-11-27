@@ -1,0 +1,75 @@
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'posts/navbar.css' %}">
+    <script src="{% static 'posts/navbar.js' %}"></script>
+    {% block nav_css %}{% endblock nav_css%}
+</head>
+    <body>
+            
+        <div id="navbar-id" class="nav-container">
+            <div class="left-side">
+                <div class="brand">
+                    Williams
+                </div>
+            </div>
+
+        {% if user.is_authenticated %}
+            <div class="right-side">
+                <div class="nav-link-container">
+                    <a href="{% url 'home' %}"> Home</a>
+                </div>
+                <div class="nav-link-container">
+                    <a class="active" href="{% url 'about' %}"> About</a>
+                </div>
+
+                <div class="nav-link-container">
+                    <a href="{% url 'newpost' %}"> New post</a>
+                </div>
+
+                <div class="nav-link-container">
+                    <div id="user-menu" class="menu-content" >
+                        <a href="{% url 'profile-detail' user.username %}"> Profile</a>
+                        <a href="{% url 'logout' %}"> Logout</a>
+                    </div>
+                    <a onclick="OpenUserMenu()"><i id="user-icon" class="glyphicon glyphicon-user"></i></a>
+
+                </div>
+
+                </div>
+            </div>
+        {% else %}
+            <div class="right-side">
+                <div class="nav-link-container">
+                    <a href="{% url 'home' %}"> Home</a>
+                </div>
+                <div class="nav-link-container">
+                    <a class="active" href="{% url 'about' %}"> About</a>
+                </div>
+
+                <div class="nav-link-container">
+                    <div id="user-menu" class="menu-content">
+                        <a href="{% url 'login' %}"> Login</a>
+                        <a href="{% url 'create-user' %}"> Signup</a>
+                    </div>
+                    <a onclick="OpenUserMenu()"><i id="user-icon" class="glyphicon glyphicon-user"></i></a>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+
+        {% block content%}{% endblock content %}
+
+        {% block footer%}{% endblock footer %}
+
+    </body>
+
+</html>

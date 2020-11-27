@@ -1,0 +1,42 @@
+{% extends 'posts/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block css %}
+
+    <link rel="stylesheet" href="{% static 'users/profile.css' %}">
+
+{% endblock css%}
+
+
+{% block content %}
+    <div id="profile-wrapper">
+
+        <div class="profile-card">
+
+            <div class="profile-heading">
+                <h2> Edit Profile </h2>
+            </div>
+
+            <form method="POST"  enctype="multipart/form-data">            
+                {% csrf_token %}
+
+                <div class="profile-picture">
+                    <img src="{{ user.profile.image.url }}" alt="profile picture">
+                </div>
+                <div class="profile-form">
+                    {{ u_form|crispy }}
+                    {{ p_form|crispy }}
+                </div>
+                <div class="profile-buttons">
+                    <p>
+                        <button type="submit" class="update-btn"> UPDATE PROFILE </button>
+                        <a href="{% url 'profile-detail' user.username  %}"><button type="button" class="cancel-btn">  CANCEL </button></a>
+                    </p>
+                </div>
+
+            </form>
+        </div>    
+    </div>
+
+{% endblock content %}

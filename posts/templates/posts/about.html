@@ -1,0 +1,21 @@
+{% extends 'posts/navbar.html' %}
+{% load static %}
+
+{% block nav_css %}
+    <link rel="stylesheet" href="{% static 'posts/about.css' %}">
+    <link rel="stylesheet" href="{% static 'posts/footer.css' %}">
+    <title>Blog-About</title>
+{% endblock nav_css%}
+
+{% block content %}
+    <div class="about-page">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta nam quod repellendus tenetur odit nisi voluptatibus cumque et aspernatur accusantium voluptate quo, molestiae totam officiis quos pariatur, recusandae deserunt esse.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium eos veniam aspernatur repudiandae. Sit, saepe vel nisi voluptatibus consequuntur non alias fuga quo? Ad quis perspiciatis sint, illum necessitatibus fugit.
+    </div>
+
+{% endblock content %}
+
+{% block footer%}
+    {% include "posts/footer.html" %}
+{% endblock footer %}
+

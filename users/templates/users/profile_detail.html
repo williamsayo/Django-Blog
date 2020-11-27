@@ -1,0 +1,54 @@
+{% extends 'posts/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block css %}
+
+    <link rel="stylesheet" href="{% static 'users/profile_detail.css' %}">
+
+{% endblock css%}
+
+
+{% block content %}
+    {% for profiles in profile %}
+    <div class="profile-container">
+        <div class="left-design">
+            <div class="logo">
+                <img src="/static/users/images/profile.svg" alt="">   
+            </div>
+            <!-- <div class="svg"> 
+                
+            </div> -->
+        </div>
+        <div id="profile-wrapper">
+                <div class="profile-card">
+                    <div class="top">
+                        <div class="user-profile">
+                            <h2> {{ profiles.user.username}}</h2>
+                            <span>{{ profiles.user.email}}</span>
+                        </div>
+                        <div class="profile-picture">
+                            <img src="{{ user.profile.image.url }}" alt="profile picture">
+                        </div>
+                        
+                    </div>
+
+                    <div class="user-info">
+                        {% if profiles.user.first_name %}
+                        <div class="firstname-label"> Firstname </div>{{ profiles.user.first_name}}
+                        {% endif %}
+                        {% if profiles.user.last_name %}
+                            <div class="lastname-label">  Lastname </div>{{ profiles.user.last_name}}
+                        {% endif %}
+                        <div class="email-label"> Email </div>{{ profiles.user.email}}
+                    </div>
+                    <div class="profile-buttons">
+                        <p><a href="{% url 'profile' user.username %}"><button class="update-btn"> EDIT PROFILE </button></a></p>
+                    </div>
+                </div>  
+            
+        </div>
+    </div>
+    {% endfor %}  
+
+{% endblock content %}

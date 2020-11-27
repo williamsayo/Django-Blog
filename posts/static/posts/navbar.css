@@ -1,0 +1,124 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.nav-container {
+    display: flex;
+    top: 0px;
+    justify-content: space-between;
+    padding: 15px 15px;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    background: black;
+    border-bottom : 1px solid rgba(100, 100, 100, 0.3);
+}
+
+.nav-container > .left-side{
+    color: white;
+}
+
+.nav-container > .right-side {
+    display: flex;
+}
+
+.nav-container > .right-side > .nav-link-container {
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 400ms;
+    margin-right: 20px;
+    padding: 0px 25px;
+}
+
+.nav-container > .right-side > .nav-link-container:hover {
+    border-bottom: 1px solid white;
+}
+
+.nav-container > .right-side > .nav-link-container a{
+    text-decoration: none;
+    color: white;
+    transition: color 400ms;
+}
+
+/* subnav bar for categories */
+
+.nav-container > .right-side > .nav-link-container > .subnav {
+    float: right;
+    overflow: hidden;
+}
+
+.nav-container > .right-side > .nav-link-container > .subnav > .subnav-content{
+    display: none;
+    position: absolute;
+    text-align: center;
+    right: 0;
+    z-index: 1;
+    width: 100%;
+    padding-bottom: 15px;
+    padding-top: 17px;
+    background: white;
+
+}
+
+.nav-container > .right-side > .nav-link-container > .subnav >.subnav-content a{
+    text-decoration: none;
+    padding: 0px 20px;
+    color: black;
+}
+
+.nav-container > .right-side > .nav-link-container > .subnav:hover .subnav-content {
+    display: block;
+}
+
+/* User menu */
+
+.nav-link-container a button{
+    border: 2px solid blue;
+}
+
+.glyphicon-user{
+    right: 0px;
+    color: white;
+    cursor: pointer;
+}
+
+.Menu-content{
+    position:absolute;
+    display: none;
+    right: 3px;
+    top: -10px;
+    width: 122px;
+    background-color: white;
+    height: 170px;
+    text-align: center;
+    transition:  500ms ease-out;
+}
+
+.nav-container > .right-side > .nav-link-container > .Menu-content > a{
+    display: block;
+    padding: 7px 0px;
+    color: black;
+    transition: 500ms ease-out;
+
+}
+
+.nav-container > .right-side > .nav-link-container > .Menu-content > a:first-child{
+    margin-top: 60px;
+    padding: 20px;
+}
+
+.nav-container > .right-side > .nav-link-container > .Menu-content > a:hover{
+    margin-left: 0px;
+    color: red;
+}
+
+/* .errorlist{
+    display: block;
+    font-size: 1.5em;
+    visibility: visible;
+} */
+
+/* @media(max-width:800px){
+    .nav-container > .right-side > .nav-link-container{
+        padding: 0px 10px;
+    }
+} */
