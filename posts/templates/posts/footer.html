@@ -26,9 +26,11 @@
                     <li> Stay updated with our latest</li>
                 </ul>
             </div>
-            <form action=".">
-                <input type="text" placeholder="Name">
-                <input type="email" name="" id="" placeholder="Email">
+            <form  name="subscribe_form" method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <!-- <input type="text" name="name" placeholder="Name">
+                <input type="email" name="email" id="email" placeholder="Email"> -->
                 <button type="submit"> Submit </button>
             </form>
         </div>

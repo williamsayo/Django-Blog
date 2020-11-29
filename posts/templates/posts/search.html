@@ -20,15 +20,6 @@
 
     {% if post %}
     
-        <main>
-            <div class="header">
-                <span> World & Tech </span>
-                <h1>Best tech blog</h1>
-                <a href="#post-item"><button class="no-outline">Explore</button></a>
-            </div>
-
-        </main>
-
 
         <div class="main-content">
             <div class="blog-post">
@@ -55,41 +46,6 @@
                 {% endfor %}
             </div>
 
-            <div class="sidebar">
-                <div class="Category">
-                    <h3>Category</h3>
-                    <a href="{% url 'category-post' 'WORLD' %}"> <div class="category-pill"> world <span> ({{world|length}}) </span> </div> </a>
-                    <a href="{% url 'category-post' 'TECHNOLOGY' %}"> <div class="category-pill"> technology <span> ({{tech|length}}) </span> </div> </a>
-                    <a href="{% url 'category-post' 'DESIGN' %}"><div class="category-pill"> design <span> ({{design|length}}) </span> </div> </a>
-                    <a href="{% url 'category-post' 'BUSINESS' %}"><div class="category-pill"> business <span> ({{business|length}}) </span> </div> </a>
-                    <a href="{% url 'category-post' 'POLITICS' %}"><div class="category-pill"> politics <span> ({{politics|length}}) </span> </div> </a>
-                    <a href="{% url 'category-post' 'HEALTH' %}"><div class="category-pill"> health <span> ({{health|length}}) </span> </div> </a>
-                    <a href="{% url 'category-post' 'TRAVEL' %}"><div class="category-pill"> travel <span> ({{travel|length}}) </span> </div> </a>
-                </div>
-
-                <div class="featured-post">
-                        <h3>Featured Posts</h3>
-                    {% for posts in featured %}
-
-                        <div class="featured-post-card">
-                            <div class="featured-image">
-                                <img src="{{ posts.featured.post_image.url}}" alt="pic">
-                            </div>
-                            <div class="post-content">
-                                <div class="post-info featured-info">
-                                    <i class="glyphicon glyphicon-calendar"></i> {{posts.featured.date_posted|date:'F d Y'}}
-                                    <i class="glyphicon glyphicon-thumbs-up"></i> {{ posts.featured.comments_quantity|length }}
-                                </div>
-                                <div class="post-title featured-title">
-                                    <a href="{% url 'view-post' posts.featured.id %}"><h3 class="blog-post-title">{{ posts.featured.title}} </h3></a>
-                                </div>
-                            </div>
-                        </div>
-             
-                    {% endfor %}
-                </div>
-
-            </div>
         </div>
 
     {% endif%}

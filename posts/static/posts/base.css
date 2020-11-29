@@ -3,6 +3,10 @@
     padding: 0px;
 }
 
+.alert{
+    margin-bottom: 0;
+}
+
 .body-container{
     position: relative;
 }

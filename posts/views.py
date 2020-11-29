@@ -1,3 +1,4 @@
+from django.http import request
 from django.shortcuts import render,redirect
 from django.views.generic import *
 from django.contrib.auth.models import User
@@ -5,9 +6,34 @@ from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from itertools import chain
-from .models import Post,Comments,FeaturedPost
-from .forms import CommentForm
+from django.contrib import messages 
+from .models import Post,Comments,FeaturedPost, Subscriber
+from .forms import CommentForm,SubscriberForm
 
+
+def Subscribe(request):
+    form = SubscriberForm()
+    if request.method == "POST":
+        form = SubscriberForm(request.POST or None)
+        
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+
+            if Subscriber.objects.filter(name=name,email=email).exists():
+                form.clean()
+                messages.info(request,'You are already subscribed to receive our newsletter')
+
+            else:
+                subscriber = Subscriber(name=name,email=email)
+                subscriber.save()
+                form.clean()
+                messages.success(request,'Successfully subscribed to receive our newsletter')
+
+        else:
+            form = SubscriberForm()
+
+    return form
 
 class home(ListView):
     model = Post
@@ -27,11 +53,17 @@ class home(ListView):
         context['politics'] = Post.objects.filter(category='POLITICS')
         context['health'] = Post.objects.filter(category='HEALTH')
         context['travel'] = Post.objects.filter(category='TRAVEL')
+        context['form'] = SubscriberForm()
+        
         return context
+
+    def post(self, request, *args, **kwargs):
+        Subscribe(self.request)   
+        return redirect('/')        
 
 class search(ListView):
     model = Post
-    template_name = 'posts/home.html'
+    template_name = 'posts/search.html'
     context_object_name = 'post'
     paginate_by = 3
 
@@ -40,6 +72,7 @@ class search(ListView):
         context = super().get_context_data(**kwargs)
         context['search_count'] = self.search_count
         context['search_var'] = self.request.GET['q']
+        context['form'] = SubscriberForm()
 
         return context
 
@@ -59,6 +92,10 @@ class search(ListView):
                 self.search_count = len(post)
 
                 return post
+
+    def post(self, request, *args, **kwargs):
+        Subscribe(self.request)   
+        return redirect('/') 
     
 
 class create_post(LoginRequiredMixin,CreateView):
@@ -89,7 +126,6 @@ def viewpost(request,pk):
     context = {'post':post,'form':form,'comment':comment}
 
     return render(request,'posts/post_view.html',context)
-
 
 # class view_post(DetailView):
 #     model = Post
@@ -173,4 +209,5 @@ class delete_post(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
 #     context_object_name = 'post'
 
 def about(request):
-    return render(request,'posts/about.html')
+    context = {'form':Subscribe(request)}
+    return render(request,'posts/about.html',context) 
