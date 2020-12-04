@@ -165,6 +165,7 @@ class view_category(ListView):
     paginate_by = 3
 
     def get_queryset(self):
+
         val = self.kwargs.get('category')
         return Post.objects.filter(category=val).order_by('-date_posted')
     
