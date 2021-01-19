@@ -130,4 +130,4 @@ CRISPY_FORMS_TAGS = 'bootstrap4'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-MEDIA_URL = '/profile_pics/'
+MEDIA_URL = '/media/'
